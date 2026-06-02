@@ -199,7 +199,16 @@
   /* dimensions */
   .dims{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:60px;align-items:center}
   .dims__fig{position:relative;border-radius:6px;overflow:hidden;background:linear-gradient(155deg,#F1ECE3 0%,#E5DCCD 100%);aspect-ratio:4/3.6}
-  .dims__fig img{width:100%;height:100%;object-fit:contain;padding:18px}
+  .dims__fig img{width:100%;height:100%;object-fit:contain;padding:22px}
+  /* elevated "gallery wall" backdrop for product images below the hero */
+  .split__media,.dims__fig,.craftcard__img{
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+      radial-gradient(125% 85% at 50% 2%, rgba(255,252,246,.92), rgba(255,252,246,0) 50%),
+      radial-gradient(105% 70% at 50% 106%, rgba(102,90,70,.36), rgba(102,90,70,0) 60%),
+      linear-gradient(168deg,#EFE7DA 0%,#E6DAC8 45%,#D5C4AC 100%);
+    background-size:140px 140px,100% 100%,100% 100%,100% 100%;
+  }
   .dimtable{width:100%;border-collapse:collapse}
   .dimtable tr{border-bottom:1px solid var(--line)}
   .dimtable td{padding:15px 0;font-size:14.5px}
