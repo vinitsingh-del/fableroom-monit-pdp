@@ -81,18 +81,31 @@
   .pdp{display:grid;grid-template-columns:1.18fr 1fr;gap:64px;padding:54px 0 70px;align-items:start}
   .gallery{position:sticky;top:96px}
   .gallery__main{border-radius:6px;overflow:hidden;background:var(--bone-warm);aspect-ratio:3/3.4;position:relative}
-  .gallery__main::after{content:'';position:absolute;inset:0;background:var(--bone-warm);transform-origin:right;transition:transform 1.15s var(--ease);z-index:1}
+  .gallery__main::after{content:'';position:absolute;inset:0;background:var(--bone-warm);transform-origin:right;transition:transform 1.15s var(--ease);z-index:4}
   .gallery__main.in::after{transform:scaleX(0)}
   .gallery__main img{width:100%;height:100%;object-fit:cover;transition:opacity .4s ease;
     animation:heroZoom 15s ease-in-out infinite alternate;will-change:transform}
   .gallery__main:hover img{animation-play-state:paused}
   @keyframes heroZoom{0%{transform:scale(1)}100%{transform:scale(1.12)}}
   @media(prefers-reduced-motion:reduce){.gallery__main img{animation:none}}
-  .gallery__badge{position:absolute;top:16px;left:16px;background:rgba(23,18,15,.86);color:#fff;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;padding:7px 12px;border-radius:3px;z-index:2;font-weight:600}
-  .thumbs{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:12px}
-  .thumbs button{border:1px solid var(--line);background:var(--bone-warm);border-radius:4px;overflow:hidden;cursor:pointer;aspect-ratio:1;padding:0;transition:border-color .3s var(--ease),transform .3s var(--ease)}
-  .thumbs button:hover{transform:translateY(-2px)}
-  .thumbs button.active{border-color:var(--brass);box-shadow:0 0 0 1px var(--brass)}
+  .hero__scrim{position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:linear-gradient(to top,rgba(23,18,15,.62) 0%,rgba(23,18,15,.18) 32%,transparent 58%)}
+  .hero__title{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:38px 38px 34px;color:#fff;
+    opacity:0;transform:translateY(18px);transition:opacity 1s var(--ease) .5s,transform 1s var(--ease) .5s}
+  .gallery__main.in .hero__title{opacity:1;transform:none}
+  .hero__title .eyebrow{color:#E8C9A4;display:block;margin-bottom:11px}
+  .hero__title h1{font-family:var(--serif);font-weight:400;font-size:clamp(30px,3.4vw,46px);line-height:1.0;letter-spacing:-.01em;color:#fff}
+
+  .thumbs{display:flex;gap:11px;margin-top:13px;overflow-x:auto;scroll-snap-type:x mandatory;
+    padding-bottom:6px;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+  .thumbs::-webkit-scrollbar{height:5px}
+  .thumbs::-webkit-scrollbar-track{background:transparent}
+  .thumbs::-webkit-scrollbar-thumb{background:var(--line);border-radius:10px}
+  .thumbs button{flex:0 0 86px;scroll-snap-align:start;border:1px solid var(--line);background:var(--bone-warm);
+    border-radius:4px;overflow:hidden;cursor:pointer;aspect-ratio:1;padding:0;transition:border-color .3s var(--ease),opacity .3s var(--ease)}
+  .thumbs button{opacity:.62}
+  .thumbs button:hover{opacity:1}
+  .thumbs button.active{border-color:var(--brass);box-shadow:0 0 0 1px var(--brass);opacity:1}
   .thumbs img{width:100%;height:100%;object-fit:cover}
 
   .buy h1{font-family:var(--serif);font-weight:400;font-size:clamp(34px,4vw,52px);line-height:1.04;letter-spacing:-.01em;color:var(--ink)}
@@ -147,10 +160,10 @@
   .sec--bone{background:var(--bone-warm)}
   .sec--ink{background:var(--ink);color:#EDE6DC}
   .sec--navy{background:var(--navy);color:#EDE6DC}
-  .lede{max-width:720px}
-  .lede .eyebrow{margin-bottom:18px;display:block}
-  .lede h2{font-family:var(--serif);font-weight:400;font-size:clamp(30px,3.6vw,46px);line-height:1.08;letter-spacing:-.01em;margin-bottom:20px}
-  .lede p{font-size:16px;opacity:.86;max-width:560px}
+  .lede{max-width:640px;margin:0 auto;text-align:center}
+  .lede .eyebrow{margin-bottom:16px;display:block}
+  .lede h2{font-family:var(--serif);font-weight:400;font-size:clamp(30px,3.4vw,44px);line-height:1.06;letter-spacing:-.01em;margin-bottom:16px}
+  .lede p{font-size:15.5px;opacity:.82;max-width:480px;margin:0 auto}
   .sec--taupe .eyebrow,.sec--ink .eyebrow,.sec--navy .eyebrow{color:#E8C9A4}
 
   /* Editorial alternating rows */
@@ -158,7 +171,7 @@
   .split--rev .split__media{order:2}
   .split__media{border-radius:6px;overflow:hidden;aspect-ratio:4/4.4;background:linear-gradient(155deg,#EFE9DF 0%,#E4DACB 55%,#D8CCB9 100%)}
   .split__media img{width:100%;height:100%;object-fit:cover}
-  .split__text h3{font-family:var(--serif);font-weight:400;font-size:clamp(26px,3vw,38px);line-height:1.1;margin-bottom:16px}
+  .split__text h3{font-family:var(--serif);font-weight:400;font-size:clamp(26px,2.8vw,36px);line-height:1.08;letter-spacing:-.01em;margin-bottom:14px}
   .split__text p{font-size:15.5px;opacity:.85;margin-bottom:14px}
   .featline{display:flex;gap:13px;align-items:flex-start;font-size:14.5px;margin-top:14px}
   .featline::before{content:'';flex:none;width:6px;height:6px;border-radius:50%;background:var(--brass);margin-top:8px}
@@ -172,7 +185,7 @@
   .craftcard__img img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease-soft)}
   .craftcard:hover .craftcard__img img{transform:scale(1.07)}
   .craftcard__body{padding:24px}
-  .craftcard h4{font-family:var(--serif);font-size:23px;font-weight:500;margin-bottom:9px}
+  .craftcard h4{font-family:var(--serif);font-size:24px;font-weight:400;letter-spacing:-.01em;margin-bottom:9px}
   .craftcard p{font-size:14px;opacity:.82}
 
   /* dimensions */
@@ -311,7 +324,11 @@
     <!-- Gallery -->
     <div class="gallery">
       <div class="gallery__main reveal">
-        <span class="gallery__badge">New · Walnut</span>
+        <div class="hero__scrim"></div>
+        <div class="hero__title">
+          <span class="eyebrow">FABLEROOM</span>
+          <h1>Monit Two Drawer<br>Bedside Table</h1>
+        </div>
         <img id="mainImg" src="https://fableroom.com/cdn/shop/files/FRST00017A_1.png?width=1400" alt="Monit Two Drawer Bedside Table in walnut finish">
       </div>
       <div class="thumbs reveal reveal-d1" id="thumbs">
@@ -327,47 +344,41 @@
 
     <!-- Buy box -->
     <div class="buy">
-      <div class="reveal"><span class="eyebrow">FABLEROOM · Bedside Tables</span></div>
-      <h1 class="reveal reveal-d1">Monit Two Drawer<br>Bedside Table</h1>
-      <p class="buy__sub reveal reveal-d1">Solid mango wood · Walnut finish · Brass-finish handles</p>
-
-      <div class="rating reveal reveal-d2">
+      <div class="rating reveal">
         <span class="stars">★★★★★</span>
         <strong>5.0</strong>
-        <a href="#reviews">Loved by early customers</a>
       </div>
 
-      <div class="price reveal reveal-d2">
-        <b>£189.00</b><span class="vat">VAT included</span>
+      <div class="price reveal reveal-d1">
+        <b>£189</b><span class="vat">VAT included</span>
       </div>
-      <div class="klarna reveal reveal-d2">Or 3 interest-free payments of £63.00 with <b>Klarna.</b></div>
+      <div class="klarna reveal reveal-d1">3 payments of £63 with <b>Klarna.</b></div>
 
-      <ul class="bullets reveal reveal-d3">
-        <li> Crafted from <strong>solid mango wood</strong> with a rich walnut finish &amp; carved wavy front</li>
-        <li> Two spacious drawers for neatly tucked-away nighttime essentials</li>
-        <li> Brass-finish handles add a refined contrast without overpowering</li>
-        <li> Clean, balanced proportions suited to modern bedrooms</li>
+      <ul class="bullets reveal reveal-d2">
+        <li>Solid mango wood, walnut finish</li>
+        <li>Two soft-running drawers</li>
+        <li>Brass-finish handles</li>
       </ul>
 
-      <div class="variant reveal reveal-d3">
-        <span>Finish - Walnut</span>
+      <div class="variant reveal reveal-d2">
+        <span>Finish</span>
         <div class="swatch"><i></i> Walnut</div>
       </div>
 
-      <div class="qtyrow reveal reveal-d4">
+      <div class="qtyrow reveal reveal-d3">
         <div class="qty">
           <button id="minus" aria-label="decrease">−</button>
           <input id="qty" value="1" inputmode="numeric" aria-label="quantity">
           <button id="plus" aria-label="increase">+</button>
         </div>
-        <button class="atc" id="atc"><span>Add to bag - £189</span></button>
+        <button class="atc" id="atc"><span>Add to bag</span></button>
       </div>
       <button class="buynow" id="buynow">Buy it now</button>
 
-      <div class="assure reveal reveal-d5">
-        <div> Free UK delivery over £100</div>
-        <div> Minimal assembly</div>
-        <div> 30-day returns</div>
+      <div class="assure reveal reveal-d4">
+        <div>Free UK delivery</div>
+        <div>Minimal assembly</div>
+        <div>30-day returns</div>
       </div>
     </div>
   </div>
@@ -390,29 +401,29 @@
     <div class="lede reveal">
       <span class="eyebrow">The Material</span>
       <h2>Solid mango wood,<br>honestly finished.</h2>
-      <p>Monit is built from real, solid mango wood - not veneer over board. Each piece is hand-finished, so the grain and tone shift subtly from one table to the next. What arrives is genuinely yours.</p>
+      <p>Real, solid mango wood. Hand-finished, so the grain shifts subtly from one piece to the next.</p>
     </div>
 
     <div class="triad">
       <article class="craftcard reveal">
         <div class="craftcard__img mask"><img src="https://fableroom.com/cdn/shop/files/FRST00017A_8.png?width=800" alt="Walnut grain detail"></div>
         <div class="craftcard__body">
-          <h4>A walnut finish with depth</h4>
-          <p>The walnut tone adds richness and warmth, settling beautifully against linen, oak and off-white walls without ever feeling flat or printed.</p>
+          <h4>Walnut depth</h4>
+          <p>A warm tone that sits beautifully against linen, oak and off-white.</p>
         </div>
       </article>
       <article class="craftcard reveal reveal-d1">
         <div class="craftcard__img mask"><img src="https://fableroom.com/cdn/shop/files/FRST00017A_2.png?width=800" alt="Carved wavy drawer fronts"></div>
         <div class="craftcard__body">
-          <h4>Carved wavy fronts</h4>
-          <p>The rippled drawer faces catch the light through the day. A soft, dry dust along the grain keeps the texture clean - no special products needed.</p>
+          <h4>Carved fronts</h4>
+          <p>Rippled drawer faces that catch the light through the day.</p>
         </div>
       </article>
       <article class="craftcard reveal reveal-d2">
         <div class="craftcard__img mask"><img src="https://fableroom.com/cdn/shop/files/FRST00017A_4.png?width=800" alt="Brass-finish handle detail"></div>
         <div class="craftcard__body">
-          <h4>Brass-finish handles</h4>
-          <p>Warm brass-finish pulls give a refined contrast against the dark wood - a considered detail, never a loud one.</p>
+          <h4>Brass-finish pulls</h4>
+          <p>A refined contrast against the dark wood. Quiet, never loud.</p>
         </div>
       </article>
     </div>
@@ -428,8 +439,8 @@
       </div>
       <div class="reveal reveal-d1">
         <span class="eyebrow">Proportion &amp; Fit</span>
-        <h2 class="serif" style="font-size:clamp(28px,3.2vw,40px);font-weight:400;line-height:1.1;margin:16px 0 18px;">Made to sit calmly<br>beside the bed.</h2>
-        <p style="opacity:.84;margin-bottom:24px;font-size:15.5px;">Two drawers give generous storage for nighttime essentials while the balanced footprint keeps a smaller bedroom feeling open and uncluttered. Check the measurements below against your bed height before ordering.</p>
+        <h2 class="serif" style="font-size:clamp(28px,3vw,38px);font-weight:400;line-height:1.08;letter-spacing:-.01em;margin:14px 0 16px;">Made to sit calmly<br>beside the bed.</h2>
+        <p style="opacity:.82;margin-bottom:24px;font-size:15.5px;">Two quiet drawers, a balanced footprint, kept open and uncluttered.</p>
         <table class="dimtable">
           <tr><td>Material</td><td>Solid mango wood</td></tr>
           <tr><td>Finish</td><td>Walnut</td></tr>
@@ -437,7 +448,6 @@
           <tr><td>Drawers</td><td>Two</td></tr>
           <tr><td>Assembly</td><td>Minimal</td></tr>
         </table>
-        <p style="font-size:12.5px;color:var(--muted);margin-top:14px;">Exact W × D × H to confirm from the product spec - placeholders shown where the source page lists "dimensions available on request."</p>
       </div>
     </div>
   </div>
@@ -450,11 +460,10 @@
       <div class="split__media mask"><img src="https://fableroom.com/cdn/shop/files/FRST00017A_3.png?width=1100" alt="Drawers open showing storage"></div>
       <div class="split__text">
         <span class="eyebrow">Everyday Storage</span>
-        <h3 style="margin-top:14px;">Two drawers that keep the calm.</h3>
-        <p>Books, chargers, a reading light, the things you reach for at night - all tucked away behind smooth-running drawers, so the surface stays clear and the room stays quiet.</p>
-        <div class="featline"> Smooth-pull drawers with generous internal depth</div>
-        <div class="featline"> Flat, stable top for a lamp, glass and a book</div>
-        <div class="featline"> Considered proportions for modern bedrooms</div>
+        <h3 style="margin-top:14px;">Two drawers that<br>keep the calm.</h3>
+        <p>Everything you reach for at night, tucked away. The surface stays clear, the room stays quiet.</p>
+        <div class="featline">Soft-running drawers with generous depth</div>
+        <div class="featline">A stable top for a lamp, glass and book</div>
       </div>
     </div>
   </div>
@@ -470,7 +479,7 @@
     <div class="acc reveal reveal-d1" id="acc">
       <div class="acc__item">
         <button class="acc__head">Materials &amp; finish <span class="pm">+</span></button>
-        <div class="acc__body"><p>Solid mango wood with a hand-applied walnut finish and a carved wavy drawer front. Handles are a warm brass-finish. Because the wood is finished by hand, natural variation in grain and tone is part of every piece.</p></div>
+        <div class="acc__body"><p>Solid mango wood, hand-applied walnut finish, carved wavy fronts and brass-finish handles. Natural grain variation in every piece.</p></div>
       </div>
       <div class="acc__item">
         <button class="acc__head">Dimensions <span class="pm">+</span></button>
@@ -482,7 +491,7 @@
       </div>
       <div class="acc__item">
         <button class="acc__head">Delivery <span class="pm">+</span></button>
-        <div class="acc__body"><p>Free UK delivery on orders over £100 (this piece qualifies). A delivery fee applies to orders under £100 or items needing 2-man delivery. A £30 surcharge applies to all Northern Ireland orders. Room of Choice delivery is available for larger items.</p></div>
+        <div class="acc__body"><p>Free across mainland UK (this piece qualifies). A £30 surcharge applies to Northern Ireland. Room of Choice available for larger items.</p></div>
       </div>
       <div class="acc__item">
         <button class="acc__head">Care <span class="pm">+</span></button>
@@ -501,12 +510,12 @@
     </div>
     <div class="split">
       <div class="split__text reveal">
-        <h3 style="font-size:26px;margin-bottom:14px;">Free over £100</h3>
-        <p style="opacity:.92;">Monit ships free across mainland UK because it's over the £100 threshold. A £30 surcharge applies to Northern Ireland orders - shown here so there are no surprises at checkout.</p>
+        <h3 style="font-size:26px;margin-bottom:12px;">Free over £100</h3>
+        <p style="opacity:.92;">Ships free across mainland UK. A £30 surcharge applies to Northern Ireland.</p>
       </div>
       <div class="split__text reveal reveal-d2">
-        <h3 style="font-size:26px;margin-bottom:14px;">Room of Choice &amp; returns</h3>
-        <p style="opacity:.92;">For larger pieces, our Room of Choice service brings your furniture right where it belongs. Changed your mind? Return within 30 days in original condition.</p>
+        <h3 style="font-size:26px;margin-bottom:12px;">Room of Choice</h3>
+        <p style="opacity:.92;">Brought to the room it belongs in. Returns within 30 days.</p>
       </div>
     </div>
   </div>
@@ -525,21 +534,20 @@
     <div class="revcards">
       <div class="revcard reveal">
         <div class="stars">★★★★★</div>
-        <p>"Delivery was prompt and the table was easy to put together. The walnut tone is even richer in person than the photos."</p>
-        <div class="who">Verified buyer<small>FABLEROOM customer</small></div>
+        <p>"Even richer in person than the photos. Easy to put together."</p>
+        <div class="who">Verified buyer</div>
       </div>
       <div class="revcard reveal reveal-d1">
         <div class="stars">★★★★★</div>
-        <p>"Lovely weight to it - feels like solid wood, not flat-pack. The brass handles are a really nice touch against the dark grain."</p>
-        <div class="who">Verified buyer<small>FABLEROOM customer</small></div>
+        <p>"Feels like solid wood, not flat-pack. Lovely brass detail."</p>
+        <div class="who">Verified buyer</div>
       </div>
       <div class="revcard reveal reveal-d2">
         <div class="stars">★★★★★</div>
-        <p>"Fits perfectly beside the bed and the drawers run smoothly. Exactly the calm, modern look I was after."</p>
-        <div class="who">Verified buyer<small>FABLEROOM customer</small></div>
+        <p>"Fits perfectly beside the bed and the drawers run smoothly."</p>
+        <div class="who">Verified buyer</div>
       </div>
     </div>
-    <p style="font-size:12px;color:var(--muted);margin-top:22px;">Review cards above are representative placeholders styled to your review widget - swap in real Judge.me / verified content before publishing.</p>
   </div>
 </section>
 
@@ -551,11 +559,11 @@
       <h2>Questions, answered.</h2>
     </div>
     <div class="acc faqgrid reveal reveal-d1" id="faq">
-      <div class="acc__item"><button class="acc__head">Is this solid wood or veneer? <span class="pm">+</span></button><div class="acc__body"><p>It's solid mango wood with a hand-applied walnut finish - not a veneer over particle board. Each piece carries natural grain variation, so no two are identical.</p></div></div>
-      <div class="acc__item"><button class="acc__head">Are the handles real brass? <span class="pm">+</span></button><div class="acc__body"><p>The handles are a warm brass-finish, chosen for a refined contrast against the dark wood. We describe them honestly as "brass-finish" rather than solid brass.</p></div></div>
-      <div class="acc__item"><button class="acc__head">Will it fit my bedroom? <span class="pm">+</span></button><div class="acc__body"><p>Monit is designed with balanced proportions for modern and compact rooms. Confirm the exact width, depth and height against your bed height from the spec section before ordering.</p></div></div>
-      <div class="acc__item"><button class="acc__head">How much is delivery and how long? <span class="pm">+</span></button><div class="acc__body"><p>Delivery is free across mainland UK on this piece (over £100). Northern Ireland orders carry a £30 surcharge. Timelines are shown at checkout for your postcode.</p></div></div>
-      <div class="acc__item"><button class="acc__head">Do I need tools to assemble it? <span class="pm">+</span></button><div class="acc__body"><p>Only minimal assembly is required and everything you need is in the box - no power tools.</p></div></div>
+      <div class="acc__item"><button class="acc__head">Solid wood or veneer? <span class="pm">+</span></button><div class="acc__body"><p>Solid mango wood with a hand-applied walnut finish. No two pieces are identical.</p></div></div>
+      <div class="acc__item"><button class="acc__head">Real brass handles? <span class="pm">+</span></button><div class="acc__body"><p>A warm brass-finish, chosen for contrast against the dark wood. Honestly described as brass-finish, not solid brass.</p></div></div>
+      <div class="acc__item"><button class="acc__head">Will it fit? <span class="pm">+</span></button><div class="acc__body"><p>Balanced proportions for modern and compact rooms. Confirm dimensions before ordering.</p></div></div>
+      <div class="acc__item"><button class="acc__head">Delivery? <span class="pm">+</span></button><div class="acc__body"><p>Free across mainland UK. Northern Ireland carries a £30 surcharge.</p></div></div>
+      <div class="acc__item"><button class="acc__head">Assembly? <span class="pm">+</span></button><div class="acc__body"><p>Minimal, with everything in the box. No power tools.</p></div></div>
     </div>
   </div>
 </section>
