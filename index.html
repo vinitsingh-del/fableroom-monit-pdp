@@ -115,6 +115,11 @@
   .rating{display:flex;align-items:center;gap:9px;margin:16px 0 18px;font-size:13px;color:var(--charcoal)}
   .stars{color:var(--brass);letter-spacing:2px;font-size:15px}
   .rating a{color:var(--muted);text-decoration:underline;text-underline-offset:3px}
+  .rating__note{color:var(--muted);font-size:13px;letter-spacing:.01em}
+  .spec{margin:22px 0 24px;border-top:1px solid var(--line)}
+  .spec__row{display:flex;justify-content:space-between;align-items:baseline;gap:18px;padding:13px 1px;border-bottom:1px solid var(--line)}
+  .spec__row dt{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .spec__row dd{font-family:var(--serif);font-size:17px;line-height:1.1;color:var(--ink);text-align:right}
   .price{display:flex;align-items:baseline;gap:13px;margin-bottom:10px}
   .price b{font-family:var(--serif);font-size:46px;font-weight:400;letter-spacing:-.01em;color:var(--ink)}
   .price .vat{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
@@ -454,6 +459,7 @@
       <div class="rating reveal">
         <span class="stars">★★★★★</span>
         <strong data-count="5" data-dec="1">5.0</strong>
+        <span class="rating__note">Loved by early customers</span>
       </div>
 
       <div class="price reveal reveal-d1">
@@ -462,11 +468,12 @@
       <div class="klarna reveal reveal-d1">3 payments of £63 with <b>Klarna.</b></div>
       <div class="exclusive reveal reveal-d1">A FABLEROOM original, designed in-house and sold only here.</div>
 
-      <ul class="bullets reveal reveal-d2">
-        <li>Solid mango wood, walnut finish</li>
-        <li>Two soft-running drawers</li>
-        <li>Brass-finish handles</li>
-      </ul>
+      <dl class="spec reveal reveal-d2">
+        <div class="spec__row"><dt>Material</dt><dd>Solid mango wood</dd></div>
+        <div class="spec__row"><dt>Handles</dt><dd>Brass-finish</dd></div>
+        <div class="spec__row"><dt>Drawers</dt><dd>Two soft-running</dd></div>
+        <div class="spec__row"><dt>Assembly</dt><dd>Minimal</dd></div>
+      </dl>
 
       <div class="variant reveal reveal-d2">
         <span>Finish</span>
