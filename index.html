@@ -81,7 +81,7 @@
   .pdp{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(0,1fr);gap:64px;padding:54px 0 70px;align-items:start}
   .pdp>*,.split>*,.dims>*{min-width:0}
   .gallery{position:sticky;top:96px}
-  .gallery__main{border-radius:6px;overflow:hidden;background:var(--bone-warm);aspect-ratio:3/3.4;position:relative;cursor:zoom-in}
+  .gallery__main{border-radius:6px;overflow:hidden;background:var(--bone-warm);aspect-ratio:3/4.08;position:relative;cursor:zoom-in}
   .gallery__main.zoom{cursor:zoom-out;touch-action:none}
   .gallery__main::after{content:'';position:absolute;inset:0;background:var(--bone-warm);transform-origin:right;transition:transform 1.15s var(--ease);z-index:4}
   .gallery__main.in::after{transform:scaleX(0)}
@@ -96,7 +96,7 @@
     opacity:0;transform:translateY(18px);transition:opacity 1s var(--ease) .5s,transform 1s var(--ease) .5s}
   .gallery__main.in .hero__title{opacity:1;transform:none}
   .hero__title .eyebrow{color:#E8C9A4;display:block;margin-bottom:11px}
-  .hero__title h1{font-family:var(--serif);font-weight:400;font-size:clamp(30px,3.4vw,46px);line-height:1.0;letter-spacing:-.01em;color:#fff}
+  .hero__title h1{font-family:var(--serif);font-weight:400;font-size:clamp(38px,4.8vw,60px);line-height:.98;letter-spacing:-.015em;color:#fff}
 
   .thumbs{display:flex;gap:11px;margin-top:13px;overflow-x:auto;scroll-snap-type:x mandatory;
     padding-bottom:6px;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
@@ -166,7 +166,9 @@
   .sec--navy{background:var(--navy);color:#EDE6DC}
   .lede{max-width:640px;margin:0 auto;text-align:center}
   .lede .eyebrow{margin-bottom:16px;display:block}
-  .lede h2{font-family:var(--serif);font-weight:400;font-size:clamp(30px,3.4vw,44px);line-height:1.06;letter-spacing:-.01em;margin-bottom:16px}
+  .lede h2{font-family:var(--serif);font-weight:400;font-size:clamp(34px,4.2vw,52px);line-height:1.04;letter-spacing:-.015em;margin-bottom:16px}
+  .reveal h2,.reveal h3{opacity:0;transform:translateY(16px);transition:opacity .9s var(--ease-soft) .12s,transform 1s var(--ease-soft) .12s}
+  .reveal.in h2,.reveal.in h3{opacity:1;transform:none}
   .lede p{font-size:15.5px;opacity:.82;max-width:480px;margin:0 auto}
   .sec--taupe .eyebrow,.sec--ink .eyebrow,.sec--navy .eyebrow{color:#E8C9A4}
 
@@ -175,7 +177,7 @@
   .split--rev .split__media{order:2}
   .split__media{border-radius:6px;overflow:hidden;aspect-ratio:4/4.4;background:linear-gradient(155deg,#EFE9DF 0%,#E4DACB 55%,#D8CCB9 100%)}
   .split__media img{width:100%;height:100%;object-fit:cover}
-  .split__text h3{font-family:var(--serif);font-weight:400;font-size:clamp(26px,2.8vw,36px);line-height:1.08;letter-spacing:-.01em;margin-bottom:14px}
+  .split__text h3{font-family:var(--serif);font-weight:400;font-size:clamp(28px,3.3vw,42px);line-height:1.05;letter-spacing:-.015em;margin-bottom:14px}
   .split__text p{font-size:15.5px;opacity:.85;margin-bottom:14px}
   .featline{display:flex;gap:13px;align-items:flex-start;font-size:14.5px;margin-top:14px}
   .featline::before{content:'';flex:none;width:6px;height:6px;border-radius:50%;background:var(--brass);margin-top:8px}
@@ -186,8 +188,10 @@
   .craftcard{background:rgba(255,255,255,.05);border:1px solid var(--line-dark);border-radius:8px;overflow:hidden;transition:transform .6s var(--ease),border-color .6s var(--ease)}
   .craftcard:hover{transform:translateY(-6px);border-color:rgba(232,201,164,.4)}
   .craftcard__img{aspect-ratio:4/3;overflow:hidden;background:linear-gradient(155deg,#EFE9DF 0%,#E0D6C6 100%)}
-  .craftcard__img img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease-soft)}
-  .craftcard:hover .craftcard__img img{transform:scale(1.07)}
+  .craftcard__img img{width:100%;height:100%;object-fit:cover;animation:matZoom 9s ease-in-out infinite alternate;will-change:transform}
+  .craftcard:hover .craftcard__img img{animation-play-state:paused}
+  @keyframes matZoom{0%{transform:scale(1.02)}100%{transform:scale(1.14)}}
+  @media(prefers-reduced-motion:reduce){.craftcard__img img{animation:none}}
   .craftcard__body{padding:24px}
   .craftcard h4{font-family:var(--serif);font-size:24px;font-weight:400;letter-spacing:-.01em;margin-bottom:9px}
   .craftcard p{font-size:14px;opacity:.82}
@@ -224,12 +228,29 @@
   .revcard .who{font-size:13px;font-weight:600}
   .revcard .who small{display:block;color:var(--muted);font-weight:400;font-size:12px;margin-top:2px}
 
+  /* wooden horizontal review marquee (below CTA) */
+  .revband{padding:60px 0 70px;background:var(--bone-warm);overflow:hidden}
+  .revband__head{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;margin-bottom:32px}
+  .revband__score{display:flex;align-items:center;gap:11px;font-family:var(--serif);font-size:22px}
+  .revband__score .stars{color:var(--brass);letter-spacing:2px;font-size:16px}
+  .revmarquee{overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+  .revtrack{display:flex;gap:18px;width:max-content;padding:6px 16px;animation:revscroll 40s linear infinite}
+  .revmarquee:hover .revtrack{animation-play-state:paused}
+  @keyframes revscroll{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+  .woodcard{flex:0 0 272px;border-radius:10px;padding:22px 22px 20px;color:#F3ECE0;position:relative;overflow:hidden;
+    background:linear-gradient(155deg,rgba(23,18,15,.74),rgba(46,32,20,.84)),url('https://fableroom.com/cdn/shop/files/FRST00017A_8.png?width=600') center/cover;
+    box-shadow:0 14px 34px rgba(23,18,15,.18);border:1px solid rgba(255,255,255,.08)}
+  .woodcard .stars{color:#E8C9A4;letter-spacing:2px;font-size:13px;display:block;margin-bottom:12px}
+  .woodcard p{font-family:var(--serif);font-size:16px;line-height:1.4;margin-bottom:14px;opacity:.96}
+  .woodcard .who{font-size:11px;text-transform:uppercase;letter-spacing:.12em;opacity:.65}
+  @media(prefers-reduced-motion:reduce){.revtrack{animation:none}}
+
   /* faq */
   .faqgrid{max-width:820px;margin:0 auto}
 
   /* closing CTA */
   .closing{text-align:center;padding:110px 0}
-  .closing h2{font-family:var(--serif);font-weight:400;font-size:clamp(36px,5vw,68px);line-height:1.02;margin-bottom:22px}
+  .closing h2{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.4vw,74px);line-height:1.0;letter-spacing:-.015em;margin-bottom:22px}
   .closing p{max-width:520px;margin:0 auto 34px;opacity:.85;font-size:16px}
   .btn-ghost{display:inline-flex;align-items:center;gap:12px;background:var(--brass);color:#fff;padding:17px 38px;border-radius:7px;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;transition:transform .4s var(--ease),background .4s var(--ease)}
   .btn-ghost:hover{transform:translateY(-3px);background:var(--brass-hover)}
@@ -306,6 +327,9 @@
     .stick__cta{gap:10px}
     .stick__price{font-size:18px}
     .stick .atc{padding:12px 20px;font-size:12px;letter-spacing:.05em}
+    .revband{padding:46px 0 54px}
+    .woodcard{flex-basis:236px;padding:18px}
+    .woodcard p{font-size:15px}
   }
 </style>
 </head>
@@ -539,36 +563,6 @@
   </div>
 </section>
 
-<!-- REVIEWS -->
-<section class="sec" id="reviews">
-  <div class="wrap">
-    <div class="revhead reveal">
-      <div>
-        <span class="eyebrow">What people say</span>
-        <div class="revscore"><b>5.0</b><div><div class="stars" style="font-size:18px;">★★★★★</div><small style="color:var(--muted);">A new arrival, loved by early customers</small></div></div>
-      </div>
-      <a href="#" class="btn-ghost" style="background:var(--ink);">Write a review</a>
-    </div>
-    <div class="revcards">
-      <div class="revcard reveal">
-        <div class="stars">★★★★★</div>
-        <p>"Even richer in person than the photos. Easy to put together."</p>
-        <div class="who">Verified buyer</div>
-      </div>
-      <div class="revcard reveal reveal-d1">
-        <div class="stars">★★★★★</div>
-        <p>"Feels like solid wood, not flat-pack. Lovely brass detail."</p>
-        <div class="who">Verified buyer</div>
-      </div>
-      <div class="revcard reveal reveal-d2">
-        <div class="stars">★★★★★</div>
-        <p>"Fits perfectly beside the bed and the drawers run smoothly."</p>
-        <div class="who">Verified buyer</div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- FAQ -->
 <section class="sec sec--bone">
   <div class="wrap">
@@ -593,6 +587,29 @@
     <h2>Bring a little calm<br>to your bedside.</h2>
     <p>Solid mango wood, a warm walnut finish, two quiet drawers. A FABLEROOM original at £189, with free UK delivery.</p>
     <a href="#" class="btn-ghost" id="ctaAdd">Add to bag</a>
+  </div>
+</section>
+
+<!-- REVIEWS (wooden marquee, below CTA) -->
+<section class="revband" id="reviews">
+  <div class="revband__head reveal">
+    <span class="eyebrow">Loved by early customers</span>
+    <div class="revband__score"><span class="stars">★★★★★</span> <b>5.0</b></div>
+  </div>
+  <div class="revmarquee">
+    <div class="revtrack">
+      <article class="woodcard"><div class="stars">★★★★★</div><p>"Even richer in person than the photos. Easy to put together."</p><span class="who">Verified buyer</span></article>
+      <article class="woodcard"><div class="stars">★★★★★</div><p>"Feels like solid wood, not flat-pack. Lovely brass detail."</p><span class="who">Verified buyer</span></article>
+      <article class="woodcard"><div class="stars">★★★★★</div><p>"Fits perfectly beside the bed and the drawers run smoothly."</p><span class="who">Verified buyer</span></article>
+      <article class="woodcard"><div class="stars">★★★★★</div><p>"The walnut tone is gorgeous against my linen bedding."</p><span class="who">Verified buyer</span></article>
+      <article class="woodcard"><div class="stars">★★★★★</div><p>"Quietly elegant. Exactly the calm look I wanted."</p><span class="who">Verified buyer</span></article>
+      <!-- duplicate set for seamless loop -->
+      <article class="woodcard" aria-hidden="true"><div class="stars">★★★★★</div><p>"Even richer in person than the photos. Easy to put together."</p><span class="who">Verified buyer</span></article>
+      <article class="woodcard" aria-hidden="true"><div class="stars">★★★★★</div><p>"Feels like solid wood, not flat-pack. Lovely brass detail."</p><span class="who">Verified buyer</span></article>
+      <article class="woodcard" aria-hidden="true"><div class="stars">★★★★★</div><p>"Fits perfectly beside the bed and the drawers run smoothly."</p><span class="who">Verified buyer</span></article>
+      <article class="woodcard" aria-hidden="true"><div class="stars">★★★★★</div><p>"The walnut tone is gorgeous against my linen bedding."</p><span class="who">Verified buyer</span></article>
+      <article class="woodcard" aria-hidden="true"><div class="stars">★★★★★</div><p>"Quietly elegant. Exactly the calm look I wanted."</p><span class="who">Verified buyer</span></article>
+    </div>
   </div>
 </section>
 
@@ -659,7 +676,7 @@ function panTo(e){
   const y=Math.max(0,Math.min(100,((e.clientY-r.top)/r.height)*100));
   main.style.transformOrigin=x+'% '+y+'%';
 }
-function zoomIn(e){zoomed=true;stage.classList.add('zoom');panTo(e);main.style.transform='scale('+ZOOM+')';}
+function zoomIn(e){zoomed=true;stage.classList.add('zoom');main.style.opacity=1;panTo(e);main.style.transform='scale('+ZOOM+')';}
 function zoomOut(){zoomed=false;stage.classList.remove('zoom');main.style.transform='';main.style.transformOrigin='center';}
 stage.addEventListener('pointermove',e=>{if(zoomed){if(e.cancelable)e.preventDefault();panTo(e);}});
 stage.addEventListener('pointerenter',e=>{if(e.pointerType==='mouse')zoomIn(e);});
@@ -674,6 +691,34 @@ document.getElementById('thumbs').addEventListener('click',e=>{
   main.style.opacity=0;
   setTimeout(()=>{main.src=b.dataset.src;main.style.opacity=1;},180);
 });
+
+/* ---- Hero auto-cycle: pause 1s, faster zoom-in, swap image 1 <-> image 4 ---- */
+const heroSrcs=['https://fableroom.com/cdn/shop/files/FRST00017A_1.png?width=1400',
+                'https://fableroom.com/cdn/shop/files/FRST00017A_4.png?width=1400'];
+let hIdx=0;
+function heroTick(){
+  if(!zoomed){
+    main.style.transition='transform 2.1s cubic-bezier(.22,1,.36,1)';
+    main.style.transformOrigin='center';
+    main.style.transform='scale(1.13)';
+  }
+  setTimeout(()=>{
+    if(!zoomed){
+      hIdx=(hIdx+1)%heroSrcs.length;
+      main.style.transition='opacity .45s ease';
+      main.style.opacity=0;
+      setTimeout(()=>{
+        if(!zoomed){
+          main.src=heroSrcs[hIdx];
+          main.style.transform='scale(1)';
+          main.style.opacity=1;
+        }
+        setTimeout(heroTick,1000);              /* pause 1s before next cycle */
+      },450);
+    } else { setTimeout(heroTick,1200); }
+  },1900);
+}
+setTimeout(heroTick,1500);
 
 /* ---- Qty ---- */
 const q=document.getElementById('qty');
@@ -702,7 +747,7 @@ document.querySelectorAll('.acc').forEach(acc=>{
 });
 
 /* ---- Subtle parallax on section media ---- */
-const para=[...document.querySelectorAll('.split__media img, .dims__fig img, .craftcard__img img')];
+const para=[...document.querySelectorAll('.split__media img, .dims__fig img')];
 window.addEventListener('scroll',()=>{
   const vh=window.innerHeight;
   para.forEach(img=>{
