@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Monit Two Drawer Bedside Table - FABLEROOM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Cormorant Garamond ≈ IvyPresto Display (brand display serif) · Hanken Grotesk ≈ HK Grotesk (brand body) -->
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* Authentic FABLEROOM theme palette (extracted from store color schemes) */
+    --brass:#B77E45;        /* scheme-1 button */
+    --brass-hover:#C4976A;
+    --taupe:#736C58;        /* scheme-2 bg */
+    --bone:#F2F2F2;         /* scheme-3 bg */
+    --bone-warm:#F0EEEB;
+    --charcoal:#2C2C2C;     /* scheme-3 button */
+    --ink:#17120F;
+    --navy:#051326;         /* scheme-4 bg */
+    --amber:#C87B01;
+    --white:#FFFFFF;
+    --line:#E5E0D8;
+    --line-dark:rgba(255,255,255,.14);
+    --muted:#8B8578;
+    --serif:'Cormorant Garamond',Georgia,serif;
+    --sans:'Hanken Grotesk',-apple-system,BlinkMacSystemFont,sans-serif;
+    --ease:cubic-bezier(.22,1,.36,1);
+    --ease-soft:cubic-bezier(.16,1,.3,1);
+    --maxw:1280px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--sans);color:var(--ink);background:var(--white);
+    -webkit-font-smoothing:antialiased;line-height:1.6;font-weight:400;
+    overflow-x:hidden;
+  }
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  .serif{font-family:var(--serif)}
+  .eyebrow{font-size:11px;letter-spacing:.32em;text-transform:uppercase;font-weight:600;color:var(--brass)}
+
+  /* ---------- Reveal animation engine (Framer-style) ---------- */
+  .reveal{opacity:0;transform:translateY(34px);transition:opacity 1s var(--ease-soft),transform 1.1s var(--ease-soft)}
+  .reveal.in{opacity:1;transform:none}
+  .reveal-d1{transition-delay:.08s}.reveal-d2{transition-delay:.16s}
+  .reveal-d3{transition-delay:.24s}.reveal-d4{transition-delay:.32s}.reveal-d5{transition-delay:.4s}
+  .mask{position:relative;overflow:hidden}
+  .mask img{transform:scale(1.12);transition:transform 1.6s var(--ease-soft)}
+  .mask.in img{transform:scale(1)}
+  .mask::after{content:'';position:absolute;inset:0;background:var(--bone-warm);transform-origin:right;transition:transform 1.15s var(--ease)}
+  .mask.in::after{transform:scaleX(0)}
+
+  /* ---------- Marquee value bar ---------- */
+  .ticker{background:var(--ink);color:#EDE6DC;font-size:12px;letter-spacing:.14em;text-transform:uppercase;overflow:hidden;white-space:nowrap;border-bottom:1px solid rgba(255,255,255,.06)}
+  .ticker__track{display:inline-flex;gap:0;animation:slide 34s linear infinite;padding:9px 0}
+  .ticker span{padding:0 26px;position:relative;font-weight:500}
+  .ticker span::after{content:'·';position:absolute;right:-3px;color:var(--brass)}
+  @keyframes slide{to{transform:translateX(-50%)}}
+
+  /* ---------- Header ---------- */
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.82);backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);transition:padding .4s var(--ease),box-shadow .4s var(--ease)}
+  header.shrink{box-shadow:0 6px 30px rgba(23,18,15,.05)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:72px;transition:height .4s var(--ease)}
+  header.shrink .nav{height:60px}
+  .nav__logo img{height:26px;width:auto;transition:height .4s var(--ease)}
+  header.shrink .nav__logo img{height:22px}
+  .nav__menu{display:flex;gap:34px;font-size:13px;letter-spacing:.04em;font-weight:500}
+  .nav__menu a{position:relative;padding:4px 0;color:var(--charcoal)}
+  .nav__menu a::after{content:'';position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--brass);transition:width .4s var(--ease)}
+  .nav__menu a:hover::after{width:100%}
+  .nav__icons{display:flex;gap:20px;align-items:center;font-size:13px;font-weight:500}
+  .nav__icons a{display:flex;align-items:center;gap:6px}
+  .cart-dot{display:inline-grid;place-items:center;min-width:18px;height:18px;border-radius:50%;background:var(--brass);color:#fff;font-size:10px;font-weight:700}
+
+  /* ---------- PDP core ---------- */
+  .pdp{display:grid;grid-template-columns:1.18fr 1fr;gap:64px;padding:54px 0 70px;align-items:start}
+  .gallery{position:sticky;top:96px}
+  .gallery__main{border-radius:6px;overflow:hidden;background:var(--bone-warm);aspect-ratio:3/3.4;position:relative}
+  .gallery__main::after{content:'';position:absolute;inset:0;background:var(--bone-warm);transform-origin:right;transition:transform 1.15s var(--ease);z-index:1}
+  .gallery__main.in::after{transform:scaleX(0)}
+  .gallery__main img{width:100%;height:100%;object-fit:cover;transition:opacity .4s ease;
+    animation:heroZoom 15s ease-in-out infinite alternate;will-change:transform}
+  .gallery__main:hover img{animation-play-state:paused}
+  @keyframes heroZoom{0%{transform:scale(1)}100%{transform:scale(1.12)}}
+  @media(prefers-reduced-motion:reduce){.gallery__main img{animation:none}}
+  .gallery__badge{position:absolute;top:16px;left:16px;background:rgba(23,18,15,.86);color:#fff;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;padding:7px 12px;border-radius:3px;z-index:2;font-weight:600}
+  .thumbs{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:12px}
+  .thumbs button{border:1px solid var(--line);background:var(--bone-warm);border-radius:4px;overflow:hidden;cursor:pointer;aspect-ratio:1;padding:0;transition:border-color .3s var(--ease),transform .3s var(--ease)}
+  .thumbs button:hover{transform:translateY(-2px)}
+  .thumbs button.active{border-color:var(--brass);box-shadow:0 0 0 1px var(--brass)}
+  .thumbs img{width:100%;height:100%;object-fit:cover}
+
+  .buy h1{font-family:var(--serif);font-weight:400;font-size:clamp(34px,4vw,52px);line-height:1.04;letter-spacing:-.01em;color:var(--ink)}
+  .buy__sub{color:var(--muted);font-size:14px;margin-top:6px;letter-spacing:.02em}
+  .rating{display:flex;align-items:center;gap:9px;margin:16px 0 18px;font-size:13px;color:var(--charcoal)}
+  .stars{color:var(--brass);letter-spacing:2px;font-size:15px}
+  .rating a{color:var(--muted);text-decoration:underline;text-underline-offset:3px}
+  .price{display:flex;align-items:baseline;gap:12px;margin-bottom:8px}
+  .price b{font-family:var(--serif);font-size:38px;font-weight:500;color:var(--ink)}
+  .price .vat{font-size:12px;color:var(--muted)}
+  .klarna{font-size:12.5px;color:var(--charcoal);background:var(--bone);display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:5px;margin-bottom:24px}
+  .klarna b{background:#FFB3C7;color:#17120F;font-weight:800;padding:1px 6px;border-radius:3px;font-size:11px;letter-spacing:.02em}
+
+  .bullets{list-style:none;margin:6px 0 26px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0;display:grid;gap:12px}
+  .bullets li{display:flex;gap:13px;font-size:14.5px;color:var(--charcoal);align-items:flex-start}
+  .bullets li::before{content:'';flex:none;width:6px;height:6px;border-radius:50%;background:var(--brass);margin-top:8px}
+  .bullets svg{flex:none;margin-top:3px;stroke:var(--brass)}
+
+  .variant{margin-bottom:20px}
+  .variant span{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:9px;font-weight:600}
+  .swatch{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--brass);border-radius:6px;padding:8px 14px;font-size:13px;font-weight:600;box-shadow:0 0 0 1px var(--brass)}
+  .swatch i{width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,#6e4a2c,#3a2415);display:inline-block}
+
+  .qtyrow{display:flex;gap:14px;align-items:stretch;margin-bottom:14px}
+  .qty{display:flex;align-items:center;border:1px solid var(--line);border-radius:7px;overflow:hidden}
+  .qty button{width:44px;height:54px;background:none;border:none;font-size:18px;cursor:pointer;color:var(--charcoal);transition:background .25s}
+  .qty button:hover{background:var(--bone)}
+  .qty input{width:40px;text-align:center;border:none;font-size:15px;font-family:var(--sans);font-weight:600}
+  .atc{flex:1;background:var(--brass);color:#fff;border:none;border-radius:7px;font-family:var(--sans);font-weight:600;font-size:14.5px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;position:relative;overflow:hidden;transition:transform .3s var(--ease)}
+  .atc span{position:relative;z-index:2}
+  .atc::before{content:'';position:absolute;inset:0;background:var(--ink);transform:translateY(101%);transition:transform .5s var(--ease)}
+  .atc:hover::before{transform:translateY(0)}
+  .atc:active{transform:scale(.99)}
+  .buynow{width:100%;background:var(--ink);color:#fff;border:none;border-radius:7px;padding:16px;font-family:var(--sans);font-weight:600;font-size:14px;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;transition:background .3s var(--ease)}
+  .buynow:hover{background:var(--taupe)}
+  .assure{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:24px}
+  .assure div{font-size:12px;color:var(--charcoal);display:flex;flex-direction:column;gap:9px;align-items:center;text-align:center;line-height:1.4;font-weight:500}
+  .assure div::before{content:'';width:26px;height:1px;background:var(--brass)}
+  .assure svg{stroke:var(--taupe)}
+
+  /* ---------- Trust strip ---------- */
+  .trustbar{background:var(--bone);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .trustbar .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:18px;padding:22px 28px}
+  .trustbar div{display:flex;align-items:center;gap:11px;font-size:13px;font-weight:500;color:var(--charcoal)}
+  .trustbar div::before{content:'';flex:none;width:6px;height:6px;border-radius:50%;background:var(--brass)}
+  .trustbar svg{stroke:var(--brass);flex:none}
+
+  /* ---------- Section scaffolding ---------- */
+  section{position:relative}
+  .sec{padding:96px 0}
+  .sec--taupe{background:var(--taupe);color:#fff}
+  .sec--bone{background:var(--bone-warm)}
+  .sec--ink{background:var(--ink);color:#EDE6DC}
+  .sec--navy{background:var(--navy);color:#EDE6DC}
+  .lede{max-width:720px}
+  .lede .eyebrow{margin-bottom:18px;display:block}
+  .lede h2{font-family:var(--serif);font-weight:400;font-size:clamp(30px,3.6vw,46px);line-height:1.08;letter-spacing:-.01em;margin-bottom:20px}
+  .lede p{font-size:16px;opacity:.86;max-width:560px}
+  .sec--taupe .eyebrow,.sec--ink .eyebrow,.sec--navy .eyebrow{color:#E8C9A4}
+
+  /* Editorial alternating rows */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+  .split--rev .split__media{order:2}
+  .split__media{border-radius:6px;overflow:hidden;aspect-ratio:4/4.4;background:linear-gradient(155deg,#EFE9DF 0%,#E4DACB 55%,#D8CCB9 100%)}
+  .split__media img{width:100%;height:100%;object-fit:cover}
+  .split__text h3{font-family:var(--serif);font-weight:400;font-size:clamp(26px,3vw,38px);line-height:1.1;margin-bottom:16px}
+  .split__text p{font-size:15.5px;opacity:.85;margin-bottom:14px}
+  .featline{display:flex;gap:13px;align-items:flex-start;font-size:14.5px;margin-top:14px}
+  .featline::before{content:'';flex:none;width:6px;height:6px;border-radius:50%;background:var(--brass);margin-top:8px}
+  .featline svg{flex:none;margin-top:3px;stroke:currentColor;opacity:.7}
+
+  /* craft three-up */
+  .triad{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:54px}
+  .craftcard{background:rgba(255,255,255,.05);border:1px solid var(--line-dark);border-radius:8px;overflow:hidden;transition:transform .6s var(--ease),border-color .6s var(--ease)}
+  .craftcard:hover{transform:translateY(-6px);border-color:rgba(232,201,164,.4)}
+  .craftcard__img{aspect-ratio:4/3;overflow:hidden;background:linear-gradient(155deg,#EFE9DF 0%,#E0D6C6 100%)}
+  .craftcard__img img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease-soft)}
+  .craftcard:hover .craftcard__img img{transform:scale(1.07)}
+  .craftcard__body{padding:24px}
+  .craftcard h4{font-family:var(--serif);font-size:23px;font-weight:500;margin-bottom:9px}
+  .craftcard p{font-size:14px;opacity:.82}
+
+  /* dimensions */
+  .dims{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center}
+  .dims__fig{position:relative;border-radius:6px;overflow:hidden;background:linear-gradient(155deg,#F1ECE3 0%,#E5DCCD 100%);aspect-ratio:4/3.6}
+  .dims__fig img{width:100%;height:100%;object-fit:contain;padding:18px}
+  .dimtable{width:100%;border-collapse:collapse}
+  .dimtable tr{border-bottom:1px solid var(--line)}
+  .dimtable td{padding:15px 0;font-size:14.5px}
+  .dimtable td:first-child{color:var(--muted);font-weight:500}
+  .dimtable td:last-child{text-align:right;font-weight:600;font-family:var(--serif);font-size:18px}
+
+  /* specs accordion */
+  .acc{max-width:780px;margin:46px auto 0;border-top:1px solid var(--line)}
+  .acc__item{border-bottom:1px solid var(--line)}
+  .acc__head{width:100%;background:none;border:none;display:flex;justify-content:space-between;align-items:center;
+    padding:22px 4px;font-family:var(--sans);font-size:16px;font-weight:600;cursor:pointer;color:var(--ink);text-align:left}
+  .acc__head .pm{font-size:24px;font-weight:300;transition:transform .4s var(--ease);color:var(--brass)}
+  .acc__item.open .pm{transform:rotate(45deg)}
+  .acc__body{max-height:0;overflow:hidden;transition:max-height .5s var(--ease)}
+  .acc__body p{padding:0 4px 24px;font-size:14.5px;color:var(--charcoal);opacity:.9}
+
+  /* reviews */
+  .revhead{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;flex-wrap:wrap;margin-bottom:40px}
+  .revscore{display:flex;align-items:center;gap:18px}
+  .revscore b{font-family:var(--serif);font-size:64px;font-weight:500;line-height:1}
+  .revcards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .revcard{background:#fff;border:1px solid var(--line);border-radius:8px;padding:28px;transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
+  .revcard:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(23,18,15,.07)}
+  .revcard .stars{font-size:14px;margin-bottom:14px}
+  .revcard p{font-size:14.5px;color:var(--charcoal);margin-bottom:18px}
+  .revcard .who{font-size:13px;font-weight:600}
+  .revcard .who small{display:block;color:var(--muted);font-weight:400;font-size:12px;margin-top:2px}
+
+  /* faq */
+  .faqgrid{max-width:820px;margin:0 auto}
+
+  /* closing CTA */
+  .closing{text-align:center;padding:110px 0}
+  .closing h2{font-family:var(--serif);font-weight:400;font-size:clamp(36px,5vw,68px);line-height:1.02;margin-bottom:22px}
+  .closing p{max-width:520px;margin:0 auto 34px;opacity:.85;font-size:16px}
+  .btn-ghost{display:inline-flex;align-items:center;gap:12px;background:var(--brass);color:#fff;padding:17px 38px;border-radius:7px;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;transition:transform .4s var(--ease),background .4s var(--ease)}
+  .btn-ghost:hover{transform:translateY(-3px);background:var(--brass-hover)}
+
+  /* footer */
+  footer{background:var(--ink);color:#C9C2B6;padding:72px 0 34px;font-size:13.5px}
+  .foot{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.4fr;gap:40px}
+  .foot h5{font-family:var(--serif);font-size:22px;color:#fff;font-weight:500;margin-bottom:16px}
+  .foot__brand p{opacity:.7;max-width:280px;line-height:1.7}
+  .foot ul{list-style:none;display:grid;gap:10px}
+  .foot li{font-size:13.5px;opacity:.78;transition:opacity .3s,color .3s}
+  .foot li:hover{opacity:1;color:var(--brass)}
+  .foot__news input{width:100%;padding:13px 14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:6px;color:#fff;font-family:var(--sans);margin:14px 0 10px}
+  .foot__news button{width:100%;padding:13px;background:var(--brass);border:none;border-radius:6px;color:#fff;font-weight:600;letter-spacing:.06em;text-transform:uppercase;font-size:12px;cursor:pointer;transition:background .3s}
+  .foot__news button:hover{background:var(--brass-hover)}
+  .footbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-top:54px;padding-top:26px;border-top:1px solid rgba(255,255,255,.1);font-size:12px;opacity:.65}
+  .pays{display:flex;gap:8px;flex-wrap:wrap}
+  .pays span{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:4px;padding:5px 9px;font-size:10px;font-weight:700;letter-spacing:.04em}
+
+  /* sticky ATC */
+  .stick{position:fixed;left:0;right:0;bottom:0;z-index:60;
+    background:rgba(247,244,239,.55);
+    backdrop-filter:blur(26px) saturate(170%);-webkit-backdrop-filter:blur(26px) saturate(170%);
+    border-top:1px solid rgba(255,255,255,.55);
+    transform:translateY(120%);transition:transform .6s var(--ease);
+    box-shadow:0 -12px 44px rgba(23,18,15,.12),inset 0 1px 0 rgba(255,255,255,.7)}
+  .stick.show{transform:translateY(0)}
+  .stick .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:13px 28px}
+  .stick__info{display:flex;align-items:center;gap:16px;min-width:0}
+  .stick__info img{width:48px;height:48px;object-fit:cover;border-radius:6px;background:rgba(255,255,255,.4);box-shadow:0 2px 10px rgba(23,18,15,.08)}
+  .stick__info b{font-family:var(--serif);font-size:19px;font-weight:500;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .stick__info small{color:var(--muted);font-size:12px}
+  .stick__cta{display:flex;align-items:center;gap:14px;flex:none}
+  .stick__price{font-family:var(--serif);font-size:26px;font-weight:500}
+  .stick .atc{padding:15px 34px;flex:none}
+
+  .toast{position:fixed;top:90px;right:28px;z-index:80;background:var(--ink);color:#fff;padding:16px 22px;border-radius:8px;display:flex;gap:12px;align-items:center;font-size:14px;
+    transform:translateX(130%);transition:transform .5s var(--ease);box-shadow:0 16px 40px rgba(0,0,0,.2)}
+  .toast.show{transform:translateX(0)}
+  .toast svg{stroke:var(--brass)}
+
+  @media(max-width:980px){
+    .pdp{grid-template-columns:1fr;gap:34px}
+    .gallery{position:static}
+    .split,.dims{grid-template-columns:1fr;gap:34px}
+    .split--rev .split__media{order:0}
+    .triad,.revcards{grid-template-columns:1fr}
+    .foot{grid-template-columns:1fr 1fr}
+    .nav__menu{display:none}
+    .assure{grid-template-columns:repeat(3,1fr)}
+  }
+  @media(max-width:560px){
+    .wrap{padding:0 18px}.sec{padding:64px 0}
+    .thumbs{grid-template-columns:repeat(4,1fr)}
+    .foot{grid-template-columns:1fr}
+    .revscore b{font-size:48px}
+    .stick .wrap{padding:9px 14px;gap:12px}
+    .stick__info{gap:11px}
+    .stick__info img{width:40px;height:40px;border-radius:5px}
+    .stick__info b{font-size:14px;line-height:1.15;max-width:38vw}
+    .stick__info small{display:none}
+    .stick__cta{gap:10px}
+    .stick__price{font-size:18px}
+    .stick .atc{padding:12px 20px;font-size:12px;letter-spacing:.05em}
+  }
+</style>
+</head>
+<body>
+
+<!-- Marquee value bar -->
+<div class="ticker">
+  <div class="ticker__track">
+    <span>Free UK delivery on orders over £100</span><span>Solid mango wood · hand-finished</span><span>Minimal assembly required</span><span>Room of Choice delivery</span>
+    <span>Free UK delivery on orders over £100</span><span>Solid mango wood · hand-finished</span><span>Minimal assembly required</span><span>Room of Choice delivery</span>
+  </div>
+</div>
+
+<!-- Header -->
+<header id="hdr">
+  <div class="wrap nav">
+    <a class="nav__logo" href="#"><img src="https://fableroom.com/cdn/shop/files/Fableroom_logo_black_1.png?width=400" alt="FABLEROOM"></a>
+    <nav class="nav__menu">
+      <a href="#">Bedside Tables</a><a href="#">Bedroom</a><a href="#">Living</a><a href="#">Storage</a><a href="#">Journal</a>
+    </nav>
+    <div class="nav__icons">
+      <a href="#">Search</a>
+      <a href="#">Account</a>
+      <a href="#">Bag <span class="cart-dot" id="cartCount">0</span></a>
+    </div>
+  </div>
+</header>
+
+<!-- PDP CORE -->
+<section class="wrap">
+  <div class="pdp">
+    <!-- Gallery -->
+    <div class="gallery">
+      <div class="gallery__main reveal">
+        <span class="gallery__badge">New · Walnut</span>
+        <img id="mainImg" src="https://fableroom.com/cdn/shop/files/FRST00017A_1.png?width=1400" alt="Monit Two Drawer Bedside Table in walnut finish">
+      </div>
+      <div class="thumbs reveal reveal-d1" id="thumbs">
+        <button class="active" data-src="https://fableroom.com/cdn/shop/files/FRST00017A_1.png?width=1400"><img src="https://fableroom.com/cdn/shop/files/FRST00017A_1.png?width=300" alt="front view"></button>
+        <button data-src="https://fableroom.com/cdn/shop/files/FRST00017A_2.png?width=1400"><img src="https://fableroom.com/cdn/shop/files/FRST00017A_2.png?width=300" alt="angle view"></button>
+        <button data-src="https://fableroom.com/cdn/shop/files/FRST00017A_3.png?width=1400"><img src="https://fableroom.com/cdn/shop/files/FRST00017A_3.png?width=300" alt="drawers open"></button>
+        <button data-src="https://fableroom.com/cdn/shop/files/FRST00017A_4.png?width=1400"><img src="https://fableroom.com/cdn/shop/files/FRST00017A_4.png?width=300" alt="brass handle detail"></button>
+        <button data-src="https://fableroom.com/cdn/shop/files/FRST00017A_5.png?width=1400"><img src="https://fableroom.com/cdn/shop/files/FRST00017A_5.png?width=300" alt="in room"></button>
+        <button data-src="https://fableroom.com/cdn/shop/files/FRST00017A_7.png?width=1400"><img src="https://fableroom.com/cdn/shop/files/FRST00017A_7.png?width=300" alt="top surface"></button>
+        <button data-src="https://fableroom.com/cdn/shop/files/FRST00017A_8.png?width=1400"><img src="https://fableroom.com/cdn/shop/files/FRST00017A_8.png?width=300" alt="texture detail"></button>
+      </div>
+    </div>
+
+    <!-- Buy box -->
+    <div class="buy">
+      <div class="reveal"><span class="eyebrow">FABLEROOM · Bedside Tables</span></div>
+      <h1 class="reveal reveal-d1">Monit Two Drawer<br>Bedside Table</h1>
+      <p class="buy__sub reveal reveal-d1">Solid mango wood · Walnut finish · Brass-finish handles</p>
+
+      <div class="rating reveal reveal-d2">
+        <span class="stars">★★★★★</span>
+        <strong>5.0</strong>
+        <a href="#reviews">Loved by early customers</a>
+      </div>
+
+      <div class="price reveal reveal-d2">
+        <b>£189.00</b><span class="vat">VAT included</span>
+      </div>
+      <div class="klarna reveal reveal-d2">Or 3 interest-free payments of £63.00 with <b>Klarna.</b></div>
+
+      <ul class="bullets reveal reveal-d3">
+        <li> Crafted from <strong>solid mango wood</strong> with a rich walnut finish &amp; carved wavy front</li>
+        <li> Two spacious drawers for neatly tucked-away nighttime essentials</li>
+        <li> Brass-finish handles add a refined contrast without overpowering</li>
+        <li> Clean, balanced proportions suited to modern bedrooms</li>
+      </ul>
+
+      <div class="variant reveal reveal-d3">
+        <span>Finish - Walnut</span>
+        <div class="swatch"><i></i> Walnut</div>
+      </div>
+
+      <div class="qtyrow reveal reveal-d4">
+        <div class="qty">
+          <button id="minus" aria-label="decrease">−</button>
+          <input id="qty" value="1" inputmode="numeric" aria-label="quantity">
+          <button id="plus" aria-label="increase">+</button>
+        </div>
+        <button class="atc" id="atc"><span>Add to bag - £189</span></button>
+      </div>
+      <button class="buynow" id="buynow">Buy it now</button>
+
+      <div class="assure reveal reveal-d5">
+        <div> Free UK delivery over £100</div>
+        <div> Minimal assembly</div>
+        <div> 30-day returns</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Trust strip -->
+<div class="trustbar">
+  <div class="wrap">
+    <div class="reveal"> Solid mango wood</div>
+    <div class="reveal reveal-d1"> Hand-finished, unique grain</div>
+    <div class="reveal reveal-d2"> Free delivery over £100</div>
+    <div class="reveal reveal-d3"> Minimal assembly</div>
+    <div class="reveal reveal-d4"> UK-based support</div>
+  </div>
+</div>
+
+<!-- MATERIAL / CRAFT STORY  (P1 · P2 · P3) -->
+<section class="sec sec--ink">
+  <div class="wrap">
+    <div class="lede reveal">
+      <span class="eyebrow">The Material</span>
+      <h2>Solid mango wood,<br>honestly finished.</h2>
+      <p>Monit is built from real, solid mango wood - not veneer over board. Each piece is hand-finished, so the grain and tone shift subtly from one table to the next. What arrives is genuinely yours.</p>
+    </div>
+
+    <div class="triad">
+      <article class="craftcard reveal">
+        <div class="craftcard__img mask"><img src="https://fableroom.com/cdn/shop/files/FRST00017A_8.png?width=800" alt="Walnut grain detail"></div>
+        <div class="craftcard__body">
+          <h4>A walnut finish with depth</h4>
+          <p>The walnut tone adds richness and warmth, settling beautifully against linen, oak and off-white walls without ever feeling flat or printed.</p>
+        </div>
+      </article>
+      <article class="craftcard reveal reveal-d1">
+        <div class="craftcard__img mask"><img src="https://fableroom.com/cdn/shop/files/FRST00017A_2.png?width=800" alt="Carved wavy drawer fronts"></div>
+        <div class="craftcard__body">
+          <h4>Carved wavy fronts</h4>
+          <p>The rippled drawer faces catch the light through the day. A soft, dry dust along the grain keeps the texture clean - no special products needed.</p>
+        </div>
+      </article>
+      <article class="craftcard reveal reveal-d2">
+        <div class="craftcard__img mask"><img src="https://fableroom.com/cdn/shop/files/FRST00017A_4.png?width=800" alt="Brass-finish handle detail"></div>
+        <div class="craftcard__body">
+          <h4>Brass-finish handles</h4>
+          <p>Warm brass-finish pulls give a refined contrast against the dark wood - a considered detail, never a loud one.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- IN-ROOM + DIMENSIONS  (P4 fit/scale) -->
+<section class="sec sec--bone">
+  <div class="wrap">
+    <div class="dims">
+      <div class="dims__fig mask reveal">
+        <img src="https://fableroom.com/cdn/shop/files/FRST00017A_5.png?width=1100" alt="Monit bedside table styled beside a bed">
+      </div>
+      <div class="reveal reveal-d1">
+        <span class="eyebrow">Proportion &amp; Fit</span>
+        <h2 class="serif" style="font-size:clamp(28px,3.2vw,40px);font-weight:400;line-height:1.1;margin:16px 0 18px;">Made to sit calmly<br>beside the bed.</h2>
+        <p style="opacity:.84;margin-bottom:24px;font-size:15.5px;">Two drawers give generous storage for nighttime essentials while the balanced footprint keeps a smaller bedroom feeling open and uncluttered. Check the measurements below against your bed height before ordering.</p>
+        <table class="dimtable">
+          <tr><td>Material</td><td>Solid mango wood</td></tr>
+          <tr><td>Finish</td><td>Walnut</td></tr>
+          <tr><td>Handles</td><td>Brass-finish</td></tr>
+          <tr><td>Drawers</td><td>Two</td></tr>
+          <tr><td>Assembly</td><td>Minimal</td></tr>
+        </table>
+        <p style="font-size:12.5px;color:var(--muted);margin-top:14px;">Exact W × D × H to confirm from the product spec - placeholders shown where the source page lists "dimensions available on request."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE ROW -->
+<section class="sec">
+  <div class="wrap">
+    <div class="split reveal">
+      <div class="split__media mask"><img src="https://fableroom.com/cdn/shop/files/FRST00017A_3.png?width=1100" alt="Drawers open showing storage"></div>
+      <div class="split__text">
+        <span class="eyebrow">Everyday Storage</span>
+        <h3 style="margin-top:14px;">Two drawers that keep the calm.</h3>
+        <p>Books, chargers, a reading light, the things you reach for at night - all tucked away behind smooth-running drawers, so the surface stays clear and the room stays quiet.</p>
+        <div class="featline"> Smooth-pull drawers with generous internal depth</div>
+        <div class="featline"> Flat, stable top for a lamp, glass and a book</div>
+        <div class="featline"> Considered proportions for modern bedrooms</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPECS ACCORDION -->
+<section class="sec sec--bone">
+  <div class="wrap">
+    <div class="lede reveal" style="margin:0 auto;text-align:center;">
+      <span class="eyebrow">The Detail</span>
+      <h2>Everything you'd want to know.</h2>
+    </div>
+    <div class="acc reveal reveal-d1" id="acc">
+      <div class="acc__item">
+        <button class="acc__head">Materials &amp; finish <span class="pm">+</span></button>
+        <div class="acc__body"><p>Solid mango wood with a hand-applied walnut finish and a carved wavy drawer front. Handles are a warm brass-finish. Because the wood is finished by hand, natural variation in grain and tone is part of every piece.</p></div>
+      </div>
+      <div class="acc__item">
+        <button class="acc__head">Dimensions <span class="pm">+</span></button>
+        <div class="acc__body"><p>Two-drawer bedside profile designed to sit comfortably beside most standard bed heights. Confirm exact width, depth and height from the live spec before ordering, especially in compact rooms.</p></div>
+      </div>
+      <div class="acc__item">
+        <button class="acc__head">Assembly <span class="pm">+</span></button>
+        <div class="acc__body"><p>Minimal assembly required - typically just attaching feet or handles. No power tools needed; everything required is included in the box.</p></div>
+      </div>
+      <div class="acc__item">
+        <button class="acc__head">Delivery <span class="pm">+</span></button>
+        <div class="acc__body"><p>Free UK delivery on orders over £100 (this piece qualifies). A delivery fee applies to orders under £100 or items needing 2-man delivery. A £30 surcharge applies to all Northern Ireland orders. Room of Choice delivery is available for larger items.</p></div>
+      </div>
+      <div class="acc__item">
+        <button class="acc__head">Care <span class="pm">+</span></button>
+        <div class="acc__body"><p>Dust along the grain with a soft, dry cloth. Avoid harsh chemicals and prolonged direct sunlight to keep the walnut tone even over time.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DELIVERY & RETURNS (P5) -->
+<section class="sec sec--taupe">
+  <div class="wrap">
+    <div class="lede reveal" style="margin-bottom:46px;">
+      <span class="eyebrow">Delivery &amp; Returns</span>
+      <h2>Clear on cost, before you order.</h2>
+    </div>
+    <div class="split">
+      <div class="split__text reveal">
+        <h3 style="font-size:26px;margin-bottom:14px;">Free over £100</h3>
+        <p style="opacity:.92;">Monit ships free across mainland UK because it's over the £100 threshold. A £30 surcharge applies to Northern Ireland orders - shown here so there are no surprises at checkout.</p>
+      </div>
+      <div class="split__text reveal reveal-d2">
+        <h3 style="font-size:26px;margin-bottom:14px;">Room of Choice &amp; returns</h3>
+        <p style="opacity:.92;">For larger pieces, our Room of Choice service brings your furniture right where it belongs. Changed your mind? Return within 30 days in original condition.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="sec" id="reviews">
+  <div class="wrap">
+    <div class="revhead reveal">
+      <div>
+        <span class="eyebrow">What people say</span>
+        <div class="revscore"><b>5.0</b><div><div class="stars" style="font-size:18px;">★★★★★</div><small style="color:var(--muted);">A new arrival, loved by early customers</small></div></div>
+      </div>
+      <a href="#" class="btn-ghost" style="background:var(--ink);">Write a review</a>
+    </div>
+    <div class="revcards">
+      <div class="revcard reveal">
+        <div class="stars">★★★★★</div>
+        <p>"Delivery was prompt and the table was easy to put together. The walnut tone is even richer in person than the photos."</p>
+        <div class="who">Verified buyer<small>FABLEROOM customer</small></div>
+      </div>
+      <div class="revcard reveal reveal-d1">
+        <div class="stars">★★★★★</div>
+        <p>"Lovely weight to it - feels like solid wood, not flat-pack. The brass handles are a really nice touch against the dark grain."</p>
+        <div class="who">Verified buyer<small>FABLEROOM customer</small></div>
+      </div>
+      <div class="revcard reveal reveal-d2">
+        <div class="stars">★★★★★</div>
+        <p>"Fits perfectly beside the bed and the drawers run smoothly. Exactly the calm, modern look I was after."</p>
+        <div class="who">Verified buyer<small>FABLEROOM customer</small></div>
+      </div>
+    </div>
+    <p style="font-size:12px;color:var(--muted);margin-top:22px;">Review cards above are representative placeholders styled to your review widget - swap in real Judge.me / verified content before publishing.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec sec--bone">
+  <div class="wrap">
+    <div class="lede reveal" style="margin:0 auto 40px;text-align:center;">
+      <span class="eyebrow">Before you buy</span>
+      <h2>Questions, answered.</h2>
+    </div>
+    <div class="acc faqgrid reveal reveal-d1" id="faq">
+      <div class="acc__item"><button class="acc__head">Is this solid wood or veneer? <span class="pm">+</span></button><div class="acc__body"><p>It's solid mango wood with a hand-applied walnut finish - not a veneer over particle board. Each piece carries natural grain variation, so no two are identical.</p></div></div>
+      <div class="acc__item"><button class="acc__head">Are the handles real brass? <span class="pm">+</span></button><div class="acc__body"><p>The handles are a warm brass-finish, chosen for a refined contrast against the dark wood. We describe them honestly as "brass-finish" rather than solid brass.</p></div></div>
+      <div class="acc__item"><button class="acc__head">Will it fit my bedroom? <span class="pm">+</span></button><div class="acc__body"><p>Monit is designed with balanced proportions for modern and compact rooms. Confirm the exact width, depth and height against your bed height from the spec section before ordering.</p></div></div>
+      <div class="acc__item"><button class="acc__head">How much is delivery and how long? <span class="pm">+</span></button><div class="acc__body"><p>Delivery is free across mainland UK on this piece (over £100). Northern Ireland orders carry a £30 surcharge. Timelines are shown at checkout for your postcode.</p></div></div>
+      <div class="acc__item"><button class="acc__head">Do I need tools to assemble it? <span class="pm">+</span></button><div class="acc__body"><p>Only minimal assembly is required and everything you need is in the box - no power tools.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING CTA -->
+<section class="sec--navy">
+  <div class="wrap closing reveal">
+    <span class="eyebrow">Monit · Walnut</span>
+    <h2>Bring a little calm<br>to your bedside.</h2>
+    <p>Solid mango wood, a warm walnut finish and two quiet drawers - at £189, with free UK delivery.</p>
+    <a href="#" class="btn-ghost" id="ctaAdd">Add to bag - £189</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div class="foot__brand">
+        <h5>FABLEROOM</h5>
+        <p>Considered furniture for modern homes - solid materials, honest finishes and proportions made to live with.</p>
+      </div>
+      <div><h5 style="font-size:15px;font-family:var(--sans);font-weight:600;color:#fff;">Shop</h5><ul><li>Bedside Tables</li><li>Bedroom</li><li>Living</li><li>Storage</li></ul></div>
+      <div><h5 style="font-size:15px;font-family:var(--sans);font-weight:600;color:#fff;">Help</h5><ul><li>Delivery &amp; Shipping</li><li>Returns</li><li>Assembly</li><li>Contact</li></ul></div>
+      <div class="foot__news"><h5 style="font-size:15px;font-family:var(--sans);font-weight:600;color:#fff;">Stay in the room</h5><p style="opacity:.7;">New pieces and quiet ideas for the home.</p><input placeholder="Email address"><button>Subscribe</button></div>
+    </div>
+    <div class="footbar">
+      <span>© FABLEROOM. Replicated PDP concept for CRO review.</span>
+      <div class="pays"><span>VISA</span><span>MASTERCARD</span><span>AMEX</span><span>KLARNA</span><span>PAYPAL</span><span>APPLE PAY</span></div>
+    </div>
+  </div>
+</footer>
+
+<!-- Sticky ATC -->
+<div class="stick" id="stick">
+  <div class="wrap">
+    <div class="stick__info">
+      <img src="https://fableroom.com/cdn/shop/files/FRST00017A_1.png?width=200" alt="">
+      <div><b>Monit Two Drawer Bedside Table</b><small>Walnut · Solid mango wood</small></div>
+    </div>
+    <div class="stick__cta">
+      <span class="stick__price">£189</span>
+      <button class="atc" id="stickAtc"><span>Add to bag</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"> Added to your bag</div>
+
+<script>
+/* ---- Reveal on scroll (Framer-style) ---- */
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.14,rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.reveal,.mask').forEach(el=>io.observe(el));
+
+/* ---- Header shrink + sticky ATC ---- */
+const hdr=document.getElementById('hdr'), stick=document.getElementById('stick');
+const pdpEnd=document.querySelector('.pdp');
+window.addEventListener('scroll',()=>{
+  const y=window.scrollY;
+  hdr.classList.toggle('shrink',y>40);
+  const r=pdpEnd.getBoundingClientRect();
+  const past=r.bottom<120;
+  const nearFoot=(window.innerHeight+y)>(document.body.offsetHeight-260);
+  stick.classList.toggle('show',past&&!nearFoot);
+},{passive:true});
+
+/* ---- Gallery thumbs ---- */
+const main=document.getElementById('mainImg');
+document.getElementById('thumbs').addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b)return;
+  document.querySelectorAll('.thumbs button').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
+  main.style.opacity=0;
+  setTimeout(()=>{main.src=b.dataset.src;main.style.opacity=1;},180);
+});
+
+/* ---- Qty ---- */
+const q=document.getElementById('qty');
+const clamp=v=>Math.max(1,Math.min(99,v||1));
+document.getElementById('plus').onclick=()=>q.value=clamp(+q.value+1);
+document.getElementById('minus').onclick=()=>q.value=clamp(+q.value-1);
+q.oninput=()=>q.value=q.value.replace(/[^0-9]/g,'');
+
+/* ---- Add to bag ---- */
+let count=0; const cc=document.getElementById('cartCount'), toast=document.getElementById('toast');
+function addBag(){
+  count+=clamp(+q.value); cc.textContent=count;
+  toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'),2200);
+}
+['atc','buynow','stickAtc','ctaAdd'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('click',addBag)});
+
+/* ---- Accordions ---- */
+document.querySelectorAll('.acc').forEach(acc=>{
+  acc.addEventListener('click',e=>{
+    const h=e.target.closest('.acc__head'); if(!h)return;
+    const item=h.parentElement, body=item.querySelector('.acc__body');
+    const open=item.classList.contains('open');
+    acc.querySelectorAll('.acc__item').forEach(i=>{i.classList.remove('open');i.querySelector('.acc__body').style.maxHeight=null});
+    if(!open){item.classList.add('open');body.style.maxHeight=body.scrollHeight+'px';}
+  });
+});
+
+/* ---- Subtle parallax on section media ---- */
+const para=[...document.querySelectorAll('.split__media img, .dims__fig img, .craftcard__img img')];
+window.addEventListener('scroll',()=>{
+  const vh=window.innerHeight;
+  para.forEach(img=>{
+    const r=img.getBoundingClientRect();
+    if(r.bottom<0||r.top>vh)return;
+    const p=(r.top-vh/2)/vh;
+    img.style.transform=`translateY(${p*-14}px) scale(1.05)`;
+  });
+},{passive:true});
+</script>
+</body>
+</html>
