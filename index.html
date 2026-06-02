@@ -199,6 +199,8 @@
 
   /* craft three-up */
   .triad{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px;margin-top:54px}
+  .lede__rule{width:54px;height:1px;background:rgba(232,201,164,.5);margin:32px auto 0;position:relative}
+  .lede__rule::before{content:'';position:absolute;left:50%;top:50%;width:5px;height:5px;background:#E8C9A4;transform:translate(-50%,-50%) rotate(45deg)}
   .craftcard{background:rgba(255,255,255,.04);border:1px solid rgba(232,201,164,.16);border-radius:6px;overflow:hidden;transition:transform .55s var(--ease),border-color .6s var(--ease),box-shadow .6s var(--ease)}
   .craftcard:hover{transform:translateY(-6px);border-color:rgba(232,201,164,.45);box-shadow:0 34px 64px -32px rgba(0,0,0,.65)}
   .craftcard__img{aspect-ratio:4/3;overflow:hidden;background:linear-gradient(155deg,#EFE9DF 0%,#E0D6C6 100%)}
@@ -226,6 +228,8 @@
     background-size:150px 150px,100% 100%,100% 100%;
   }
   .split__media>img,.dims__fig>img,.craftcard__img>img,.exp__stage>img{mix-blend-mode:multiply;filter:saturate(.9)}
+  .craftcard__img{border-bottom:1px solid rgba(232,201,164,.22)}
+  .craftcard__img::before{content:'';position:absolute;inset:12px;border:1px solid rgba(232,201,164,.38);z-index:4;pointer-events:none}
   .split__media,.dims__fig{box-shadow:0 34px 64px -28px rgba(28,22,16,.5)}
   .dimtable{width:100%;border-collapse:collapse}
   .dimtable tr{border-bottom:1px solid var(--line)}
@@ -524,9 +528,11 @@
       <p>Real, solid mango wood. Hand-finished, so the grain shifts subtly from one piece to the next.</p>
     </div>
 
+    <div class="lede__rule reveal reveal-d1"></div>
+
     <div class="triad">
       <article class="craftcard reveal">
-        <div class="craftcard__img mask"><img src="https://fableroom.com/cdn/shop/files/FRST00017A_8.png?width=800" alt="Walnut grain detail"></div>
+        <div class="craftcard__img mask"><img src="https://fableroom.com/cdn/shop/files/FRST00017A_7.png?width=800" alt="Walnut grain and warm tone"></div>
         <div class="craftcard__body">
           <span class="craftcard__no">I</span>
           <h4>Walnut depth</h4>
