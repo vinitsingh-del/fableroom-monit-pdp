@@ -333,7 +333,8 @@
     header.shrink .nav__logo img{height:15px}
     .nav__icons{gap:16px;font-size:12.5px}
     .nav__icons a:not(:last-child){display:none}
-    .hero__title{padding:26px 22px 24px}
+    .hero__title{padding:24px 22px 42px}
+    .hero__title h1{font-size:clamp(30px,8.4vw,40px);line-height:1.06}
     .gallery__hint{top:12px;right:12px;font-size:9px;padding:5px 9px}
     .exclusive{font-size:14px;margin-bottom:22px}
     .assure{gap:10px}
@@ -725,7 +726,14 @@
 <script>
 /* ---- Reveal on scroll (Framer-style) ---- */
 const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.14,rootMargin:'0px 0px -8% 0px'});
-document.querySelectorAll('.reveal,.mask').forEach(el=>io.observe(el));
+const _revEls=[...document.querySelectorAll('.reveal,.mask')];
+const startReveals=()=>_revEls.forEach(el=>io.observe(el));
+if(window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches){
+  _revEls.forEach(el=>el.classList.add('in'));
+}else{
+  window.addEventListener('load',()=>setTimeout(startReveals,1300));
+  setTimeout(startReveals,3000); /* fallback if load is slow */
+}
 
 /* ---- Header shrink + sticky ATC ---- */
 const hdr=document.getElementById('hdr'), stick=document.getElementById('stick');
