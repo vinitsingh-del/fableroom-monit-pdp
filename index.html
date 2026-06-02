@@ -199,16 +199,18 @@
 
   /* craft three-up */
   .triad{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px;margin-top:54px}
-  .craftcard{background:rgba(255,255,255,.05);border:1px solid var(--line-dark);border-radius:8px;overflow:hidden;transition:transform .6s var(--ease),border-color .6s var(--ease)}
-  .craftcard:hover{transform:translateY(-6px);border-color:rgba(232,201,164,.4)}
+  .craftcard{background:rgba(255,255,255,.04);border:1px solid rgba(232,201,164,.16);border-radius:6px;overflow:hidden;transition:transform .55s var(--ease),border-color .6s var(--ease),box-shadow .6s var(--ease)}
+  .craftcard:hover{transform:translateY(-6px);border-color:rgba(232,201,164,.45);box-shadow:0 34px 64px -32px rgba(0,0,0,.65)}
   .craftcard__img{aspect-ratio:4/3;overflow:hidden;background:linear-gradient(155deg,#EFE9DF 0%,#E0D6C6 100%)}
   .craftcard__img img{width:100%;height:100%;object-fit:cover;animation:matZoom 9s ease-in-out infinite alternate;will-change:transform}
   .craftcard:hover .craftcard__img img{animation-play-state:paused}
   @keyframes matZoom{0%{transform:scale(1.02)}100%{transform:scale(1.14)}}
   @media(prefers-reduced-motion:reduce){.craftcard__img img{animation:none}}
-  .craftcard__body{padding:24px}
-  .craftcard h4{font-family:var(--serif);font-size:24px;font-weight:400;letter-spacing:-.01em;margin-bottom:9px}
-  .craftcard p{font-size:14px;opacity:.82}
+  .craftcard__body{padding:28px 26px 32px}
+  .craftcard__no{display:block;font-family:var(--serif);font-size:13px;letter-spacing:.34em;color:#E8C9A4;margin-bottom:16px}
+  .craftcard__no::after{content:'';display:block;width:26px;height:1px;background:rgba(232,201,164,.5);margin-top:13px}
+  .craftcard h4{font-family:var(--serif);font-size:26px;font-weight:400;letter-spacing:-.01em;margin-bottom:11px}
+  .craftcard p{font-size:14px;opacity:.76;line-height:1.62}
 
   /* dimensions */
   .dims{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:60px;align-items:center}
@@ -526,6 +528,7 @@
       <article class="craftcard reveal">
         <div class="craftcard__img mask"><img src="https://fableroom.com/cdn/shop/files/FRST00017A_8.png?width=800" alt="Walnut grain detail"></div>
         <div class="craftcard__body">
+          <span class="craftcard__no">I</span>
           <h4>Walnut depth</h4>
           <p>A warm tone that sits beautifully against linen, oak and off-white.</p>
         </div>
@@ -533,6 +536,7 @@
       <article class="craftcard reveal reveal-d1">
         <div class="craftcard__img mask"><img src="https://fableroom.com/cdn/shop/files/FRST00017A_2.png?width=800" alt="Carved wavy drawer fronts"></div>
         <div class="craftcard__body">
+          <span class="craftcard__no">II</span>
           <h4>Carved fronts</h4>
           <p>Rippled drawer faces that catch the light through the day.</p>
         </div>
@@ -540,6 +544,7 @@
       <article class="craftcard reveal reveal-d2">
         <div class="craftcard__img mask"><img src="https://fableroom.com/cdn/shop/files/FRST00017A_4.png?width=800" alt="Brass-finish handle detail"></div>
         <div class="craftcard__body">
+          <span class="craftcard__no">III</span>
           <h4>Brass-finish pulls</h4>
           <p>A refined contrast against the dark wood. Quiet, never loud.</p>
         </div>
