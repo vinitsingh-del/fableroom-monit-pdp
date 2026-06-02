@@ -321,6 +321,7 @@
   }
   @media(max-width:560px){
     .wrap{padding:0 18px}.sec{padding:64px 0}
+    .gallery__main{aspect-ratio:3/5.1}
     .foot{grid-template-columns:minmax(0,1fr)}
     .revscore b{font-size:48px}
     .nav{height:62px}
@@ -363,6 +364,25 @@
   @keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-2%)}100%{transform:translate(2%,3%)}}
   .progress{position:fixed;top:0;left:0;height:2px;width:100%;background:var(--brass);z-index:9500;transform:scaleX(0);transform-origin:left;will-change:transform}
   @media(prefers-reduced-motion:reduce){.grain{animation:none}.loader__bar i{animation:none;transform:scaleX(1)}}
+  /* ===== Experience the product (zoom) ===== */
+  .exp{padding:100px 0 110px;background:var(--ink);color:#EDE6DC;overflow:hidden}
+  .exp__head{max-width:640px;margin:0 auto 42px;text-align:center}
+  .exp__head .eyebrow{display:inline-block;color:#E8C9A4;margin-bottom:16px}
+  .exp__head h2{font-family:var(--serif);font-weight:400;font-size:clamp(34px,4.4vw,54px);line-height:1.03;letter-spacing:-.015em;margin-bottom:16px}
+  .exp__head p{font-size:15.5px;opacity:.8;max-width:480px;margin:0 auto}
+  .exp__stage{position:relative;max-width:1040px;margin:0 auto;border-radius:10px;overflow:hidden;aspect-ratio:16/11;
+    cursor:zoom-in;background:var(--bone-warm);box-shadow:0 50px 120px rgba(0,0,0,.42),inset 0 0 0 1px rgba(255,255,255,.05)}
+  .exp__stage.zoom{cursor:zoom-out;touch-action:none}
+  .exp__stage img{width:100%;height:100%;object-fit:cover;transform-origin:center;transition:transform .45s var(--ease-soft);will-change:transform}
+  .exp__stage.zoom img{transition:transform .1s linear}
+  .exp__hint{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);z-index:3;
+    background:rgba(23,18,15,.55);color:#fff;font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;
+    padding:7px 14px;border-radius:20px;backdrop-filter:blur(6px);transition:opacity .4s ease;pointer-events:none;white-space:nowrap}
+  .exp__stage.zoom .exp__hint{opacity:0}
+  @media(max-width:560px){
+    .exp{padding:70px 0 76px}
+    .exp__stage{aspect-ratio:4/4.6;border-radius:8px}
+  }
 </style>
 </head>
 <body>
@@ -627,6 +647,19 @@
   </div>
 </section>
 
+<!-- EXPERIENCE THE PRODUCT (zoom) -->
+<section class="exp" id="experience">
+  <div class="exp__head reveal">
+    <span class="eyebrow">Experience Monit</span>
+    <h2>Get closer.<br>Explore every grain.</h2>
+    <p>Move across the piece to zoom into the walnut finish, the carved fronts and the brass-finish pulls.</p>
+  </div>
+  <div class="exp__stage reveal reveal-d1" id="expStage">
+    <span class="exp__hint">Hover &middot; tap &amp; hold to zoom</span>
+    <img id="expImg" src="https://fableroom.com/cdn/shop/files/FRST00017A_2.png?width=1600" alt="Explore the Monit Two Drawer Bedside Table in detail">
+  </div>
+</section>
+
 <!-- REVIEWS (wooden marquee, below CTA) -->
 <section class="revband" id="reviews">
   <div class="revband__head reveal">
@@ -782,6 +815,23 @@ document.querySelectorAll('.acc').forEach(acc=>{
     if(!open){item.classList.add('open');body.style.maxHeight=body.scrollHeight+'px';}
   });
 });
+
+/* ---- Experience section: pointer zoom (self-contained) ---- */
+(function(){
+  const stage=document.getElementById('expStage'); const img=document.getElementById('expImg');
+  if(!stage||!img) return;
+  let on=false; const Z=2.6;
+  function pan(e){const r=stage.getBoundingClientRect();
+    const x=Math.max(0,Math.min(100,((e.clientX-r.left)/r.width)*100));
+    const y=Math.max(0,Math.min(100,((e.clientY-r.top)/r.height)*100));
+    img.style.transformOrigin=x+'% '+y+'%';}
+  function zin(e){on=true;stage.classList.add('zoom');pan(e);img.style.transform='scale('+Z+')';}
+  function zout(){on=false;stage.classList.remove('zoom');img.style.transform='';img.style.transformOrigin='center';}
+  stage.addEventListener('pointermove',e=>{if(on){if(e.cancelable)e.preventDefault();pan(e);}});
+  stage.addEventListener('pointerenter',e=>{if(e.pointerType==='mouse')zin(e);});
+  stage.addEventListener('pointerleave',e=>{if(e.pointerType==='mouse')zout();});
+  stage.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse'){on?zout():zin(e);}});
+})();
 
 /* ---- Premium interactions (chrome, theme-preserving) ---- */
 (function(){
