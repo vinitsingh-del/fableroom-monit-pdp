@@ -167,8 +167,16 @@
   .lede{max-width:640px;margin:0 auto;text-align:center}
   .lede .eyebrow{margin-bottom:16px;display:block}
   .lede h2{font-family:var(--serif);font-weight:400;font-size:clamp(34px,4.2vw,52px);line-height:1.04;letter-spacing:-.015em;margin-bottom:16px}
-  .reveal h2,.reveal h3{opacity:0;transform:translateY(16px);transition:opacity .9s var(--ease-soft) .12s,transform 1s var(--ease-soft) .12s}
-  .reveal.in h2,.reveal.in h3{opacity:1;transform:none}
+  .reveal h2,.reveal h3{opacity:0;transform:translateY(20px);clip-path:inset(0 0 108% 0);
+    transition:opacity .9s var(--ease-soft) .1s,transform 1s var(--ease-soft) .1s,clip-path 1.1s var(--ease) .08s}
+  .reveal.in h2,.reveal.in h3{opacity:1;transform:none;clip-path:inset(0 0 -12% 0)}
+  .reveal .eyebrow{display:inline-block;opacity:0;transition:opacity .8s ease .15s,letter-spacing 1s var(--ease) .15s}
+  .reveal.in .eyebrow{opacity:1}
+  .reveal .eyebrow{letter-spacing:.6em}
+  .reveal.in .eyebrow{letter-spacing:.32em}
+  .triad{perspective:1100px}
+  .craftcard{transform-style:preserve-3d}
+  .btn-ghost:hover{box-shadow:0 16px 40px rgba(183,126,69,.34)}
   .lede p{font-size:15.5px;opacity:.82;max-width:480px;margin:0 auto}
   .sec--taupe .eyebrow,.sec--ink .eyebrow,.sec--navy .eyebrow{color:#E8C9A4}
 
@@ -340,9 +348,29 @@
     .woodcard{flex-basis:236px;padding:18px}
     .woodcard p{font-size:15px}
   }
+  /* ===== Premium chrome (theme-preserving) ===== */
+  .loader{position:fixed;inset:0;z-index:10000;background:var(--ink);display:flex;align-items:center;justify-content:center;transition:transform 1.05s var(--ease) .1s;will-change:transform}
+  .loader.done{transform:translateY(-100%)}
+  .loader__inner{display:flex;flex-direction:column;align-items:center;gap:22px;transition:opacity .5s ease,transform .8s var(--ease)}
+  .loader.done .loader__inner{opacity:0;transform:translateY(-14px)}
+  .loader__brand{font-family:var(--serif);color:#EDE6DC;font-size:clamp(26px,6vw,42px);letter-spacing:.4em;text-indent:.4em;font-weight:400}
+  .loader__bar{width:130px;height:1px;background:rgba(255,255,255,.16);overflow:hidden;position:relative}
+  .loader__bar i{position:absolute;inset:0;background:var(--brass);transform:scaleX(0);transform-origin:left;animation:loadbar 1.2s var(--ease) forwards}
+  @keyframes loadbar{to{transform:scaleX(1)}}
+  .grain{position:fixed;inset:-120%;z-index:9000;pointer-events:none;opacity:.045;mix-blend-mode:soft-light;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+    animation:grain 1.2s steps(4) infinite}
+  @keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-2%)}100%{transform:translate(2%,3%)}}
+  .progress{position:fixed;top:0;left:0;height:2px;width:100%;background:var(--brass);z-index:9500;transform:scaleX(0);transform-origin:left;will-change:transform}
+  @media(prefers-reduced-motion:reduce){.grain{animation:none}.loader__bar i{animation:none;transform:scaleX(1)}}
 </style>
 </head>
 <body>
+
+<!-- Premium chrome -->
+<div class="loader" id="loader"><div class="loader__inner"><span class="loader__brand">FABLEROOM</span><span class="loader__bar"><i></i></span></div></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="progress" id="progress"></div>
 
 <!-- Marquee value bar -->
 <div class="ticker">
@@ -396,11 +424,11 @@
     <div class="buy">
       <div class="rating reveal">
         <span class="stars">★★★★★</span>
-        <strong>5.0</strong>
+        <strong data-count="5" data-dec="1">5.0</strong>
       </div>
 
       <div class="price reveal reveal-d1">
-        <b>£189</b><span class="vat">VAT included</span>
+        <b data-count="189" data-prefix="£">£189</b><span class="vat">VAT included</span>
       </div>
       <div class="klarna reveal reveal-d1">3 payments of £63 with <b>Klarna.</b></div>
       <div class="exclusive reveal reveal-d1">A FABLEROOM original, designed in-house and sold only here.</div>
@@ -603,7 +631,7 @@
 <section class="revband" id="reviews">
   <div class="revband__head reveal">
     <span class="eyebrow">Loved by early customers</span>
-    <div class="revband__score"><span class="stars">★★★★★</span> <b>5.0</b></div>
+    <div class="revband__score"><span class="stars">★★★★★</span> <b data-count="5" data-dec="1">5.0</b></div>
   </div>
   <div class="revmarquee">
     <div class="revtrack">
@@ -754,6 +782,61 @@ document.querySelectorAll('.acc').forEach(acc=>{
     if(!open){item.classList.add('open');body.style.maxHeight=body.scrollHeight+'px';}
   });
 });
+
+/* ---- Premium interactions (chrome, theme-preserving) ---- */
+(function(){
+  const reduceM = window.matchMedia ? matchMedia('(prefers-reduced-motion:reduce)').matches : false;
+  const fine = window.matchMedia ? matchMedia('(hover:hover) and (pointer:fine)').matches : false;
+
+  /* preloader curtain */
+  const loader=document.getElementById('loader');
+  if(loader){
+    if(reduceM){ loader.classList.add('done'); }
+    else{
+      window.addEventListener('load',()=>setTimeout(()=>loader.classList.add('done'),1250));
+      setTimeout(()=>loader.classList.add('done'),2800); /* fallback if load is slow */
+    }
+    setTimeout(()=>{loader.style.display='none';},4200);
+  }
+
+  /* scroll progress bar */
+  const prog=document.getElementById('progress');
+  function upProg(){ const h=document.documentElement; const max=h.scrollHeight-h.clientHeight;
+    const p=max>0?(h.scrollTop||document.body.scrollTop)/max:0; if(prog)prog.style.transform='scaleX('+p.toFixed(4)+')'; }
+  window.addEventListener('scroll',upProg,{passive:true}); upProg();
+
+  /* count-up numbers (land exactly on original value) */
+  function countUp(el,to,dur,prefix,dec){
+    const start=performance.now();
+    (function tick(t){ let p=Math.min(1,(t-start)/dur); p=1-Math.pow(1-p,3);
+      const v=to*p; el.textContent=(prefix||'')+(dec?v.toFixed(dec):Math.round(v).toLocaleString());
+      if(p<1)requestAnimationFrame(tick);
+      else el.textContent=(prefix||'')+(dec?to.toFixed(dec):Math.round(to).toLocaleString());
+    })(start);
+  }
+  if(!reduceM){
+    const cu=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){const el=e.target;
+      countUp(el,parseFloat(el.dataset.count),1100,el.dataset.prefix||'',el.dataset.dec?+el.dataset.dec:0);
+      cu.unobserve(el);}})},{threshold:.6});
+    document.querySelectorAll('[data-count]').forEach(el=>cu.observe(el));
+  }
+
+  /* magnetic buttons + 3D card tilt (desktop pointers only) */
+  if(fine && !reduceM){
+    document.querySelectorAll('.btn-ghost,.buynow').forEach(btn=>{
+      btn.addEventListener('pointermove',e=>{const r=btn.getBoundingClientRect();
+        const mx=(e.clientX-r.left-r.width/2)/r.width, my=(e.clientY-r.top-r.height/2)/r.height;
+        btn.style.transform='translate('+(mx*9).toFixed(1)+'px,'+(my*9).toFixed(1)+'px)';});
+      btn.addEventListener('pointerleave',()=>{btn.style.transform='';});
+    });
+    document.querySelectorAll('.craftcard').forEach(card=>{
+      card.addEventListener('pointermove',e=>{const r=card.getBoundingClientRect();
+        const mx=(e.clientX-r.left)/r.width-.5, my=(e.clientY-r.top)/r.height-.5;
+        card.style.transform='perspective(1100px) rotateX('+(-my*5).toFixed(2)+'deg) rotateY('+(mx*5).toFixed(2)+'deg) translateY(-6px)';});
+      card.addEventListener('pointerleave',()=>{card.style.transform='';});
+    });
+  }
+})();
 
 /* ---- Parallax engine (mobile-tuned, rAF, reduced-motion aware) ---- */
 (function(){
